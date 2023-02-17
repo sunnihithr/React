@@ -1,13 +1,8 @@
-import { danger } from "danger"
+import { fail, warn, message, markdown, danger } from "danger"
 
-const docs = danger.git.fileMatch("**/*.md")
-const app = danger.git.fileMatch("src/**/*.ts")
-const tests = danger.git.fileMatch("*/__tests__/*")
+fail("This is a failure message")
+warn("This is a warning")
+message("This is a normal message")
+markdown("*Markdown* is also **supported**")
 
-if (docs.edited) {
-  message("Thanks - We :heart: our [documentarians](http://www.writethedocs.org/)!")
-}
-
-if (app.modified && !tests.modified) {
-  warn("You have app changes without tests.")
-}
+const { additions = 0, deletions = 0 } = danger.github.prmessage(`:tada: The PR added ${additions} and removed ${deletions} lines.`)
